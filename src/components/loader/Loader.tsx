@@ -2,12 +2,7 @@ import { Audio } from "react-loader-spinner";
 import css from "./Loader.module.css";
 import React, { FC } from "react";
 
-interface LoaderProps {
-  size: number; // Розмір індикатора завантаження
-  color: string;
-  radius: number; // Колір індикатора
-}
-const Loader: React.FC<LoaderProps> = () => {
+const Loader: FC = () => {
   return (
     <div className={css.loader}>
       <Audio

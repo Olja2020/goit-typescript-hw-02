@@ -9,7 +9,7 @@ export interface ImageData {
   };
 }
 
-interface ImageResponse {
+export interface ImageResponse {
   data: {
     total: number;
     total_pages: number;

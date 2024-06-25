@@ -7,15 +7,16 @@ import ErrorMessage from "./errorMassage/ErrorMessage";
 import ImageModal from "./imageModal/ImageModal";
 import React from "react";
 import { getImages } from "../Api";
-
-interface ImageData {
-  id: string;
-  alt_description: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-}
+import { ImageResponse } from "../Api";
+import { ImageData } from "../Api";
+// interface ImageData {
+//   id: string;
+//   alt_description: string;
+//   urls: {
+//     small: string;
+//     regular: string;
+//   };
+// }
 
 export interface ImageProps {
   openModal: (image: ImageData) => void;
@@ -29,11 +30,17 @@ export interface SearchBarProps {
 export interface LoadMoreBtnProps {
   onClick: () => void;
 }
-
+// interface ImageResponse {
+//   data: {
+//     total: number;
+//     total_pages: number;
+//     results: ImageData[];
+//   };
+// }
 export interface ImageModalProps {
-  image: ImageData | null;
+  // image: ImageData;
   closeModal: () => void;
-  data: ImageData | null;
+  data: ImageData;
 }
 export default function App() {
   const [images, setImages] = useState<ImageData[]>([]);
@@ -52,7 +59,7 @@ export default function App() {
       try {
         setIsLoading(true);
         setIsError(false);
-        const data = await getImages(searchQuery, page);
+        const data: ImageResponse = await getImages(searchQuery, page);
         setImages((prevState) => [...prevState, ...data.results]);
         setShowBtn(data.total_pages && data.total_pages !== page);
       } catch (error) {
@@ -84,7 +91,7 @@ export default function App() {
   return (
     <div>
       <SearchBar images={images} onSearch={handleSearch} />
-      <ImageGallery items={images} openModal={openModal} />
+      <ImageGallery images={images} openModal={openModal} />
       {isLoading && <Loader />}
       {showBtn && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
       {isError && <ErrorMessage />}
@@ -92,9 +99,10 @@ export default function App() {
         <ImageModal
           // image={selectedImage}
           closeModal={closeModal}
-          data={selectedImage}
-        />
-      )}
+        data={selectedImage !== null ? { selectedImage } : null} 
+        //  { if (ImageData !== null) && data = { selectedImage } }/>
+      )
+    }
     </div>
   );
 }

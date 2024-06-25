@@ -2,23 +2,16 @@ import css from "./SearchBar.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import { Formik, Form, Field } from "formik";
 import React, { FC } from "react";
-
+import { ImageData } from "../../Api";
 
 const notify = () => toast("Необхідно ввести текст для пошуку зображень");
 
- interface SearchBarProps {
+interface SearchBarProps {
   images: ImageData[];
   onSearch: (topic: string) => void;
 }
-interface ImageData {
-  id: string;
-  alt_description: string;
-  urls: {
-    small: string;
-    regular: string;
-  };
-}
-const SearchBar: React.FC<SearchBarProps>({ onSearch, images }) {
+
+const SearchBar: FC<SearchBarProps> = ({ onSearch, images }) => {
   return (
     <Formik
       initialValues={{ guery: "" }}
@@ -44,5 +37,5 @@ const SearchBar: React.FC<SearchBarProps>({ onSearch, images }) {
       </Form>
     </Formik>
   );
-}
+};
 export default SearchBar;

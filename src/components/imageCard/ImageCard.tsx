@@ -1,14 +1,14 @@
 import css from "./ImageCard.module.css";
 import React, { FC } from "react";
 
-interface ImageItemProps {
+interface ImageCardProps {
   data: {
     alt_description: string;
     urls: { small: string };
   };
 }
 
-const ImageCard: FC<ImageItemProps> = ({
+const ImageCard: FC<ImageCardProps> = ({
   data: {
     alt_description,
     urls: { small },

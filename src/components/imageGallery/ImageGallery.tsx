@@ -12,15 +12,15 @@ interface ImageData {
   };
 }
 
-interface ImageListProps {
-  items: ImageData[];
+interface ImageGalleryProps {
+  images: ImageData[];
   openModal: (image: ImageData) => void;
 }
 
-const ImageGallery: FC<ImageListProps> = ({ items, openModal }) => {
+const ImageGallery: FC<ImageGalleryProps> = ({ images, openModal }) => {
   return (
     <ul className={css.list}>
-      {items.map((item: ImageData) => (
+      {images.map((item: ImageData) => (
         <li className={css.item} key={item.id} onClick={() => openModal(item)}>
           <ImageCard data={item} />
         </li>
