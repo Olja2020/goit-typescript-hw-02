@@ -17,20 +17,20 @@ interface ImageData {
   };
 }
 
-interface ImageProps {
+export interface ImageProps {
   openModal: (image: ImageData) => void;
 }
 
-interface SearchBarProps {
+export interface SearchBarProps {
   images: ImageData[];
   onSearch: (topic: string) => void;
 }
 
-interface LoadMoreBtnProps {
+export interface LoadMoreBtnProps {
   onClick: () => void;
 }
 
-interface ImageModalProps {
+export interface ImageModalProps {
   image: ImageData | null;
   closeModal: () => void;
   data: ImageData | null;
@@ -73,7 +73,7 @@ export default function App() {
     setPage(page + 1);
   };
 
-  function openModal(image: ImageDataRegular) {
+  function openModal(image: ImageData) {
     setIsOpen(true);
     setSelectedImage(image);
   }

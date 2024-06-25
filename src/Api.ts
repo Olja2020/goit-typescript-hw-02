@@ -1,7 +1,7 @@
 import axios from "axios";
 
-interface ImageData {
-  id: string;
+export interface ImageData {
+  id: number;
   alt_description: string;
   urls: {
     small: string;
@@ -10,9 +10,11 @@ interface ImageData {
 }
 
 interface ImageResponse {
-  total: number;
-  total_pages: number;
-  results: ImageData[];
+  data: {
+    total: number;
+    total_pages: number;
+    results: ImageData[];
+  };
 }
 
 axios.defaults.baseURL = "https://api.unsplash.com/";

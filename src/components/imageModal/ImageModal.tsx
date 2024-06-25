@@ -1,8 +1,15 @@
-
 import { useEffect } from "react";
 import ReactModal from "react-modal";
+import React, { FC } from "react";
 
-const ImageModal = ({
+interface ImageModalProps {
+  data: {
+    alt_description: string;
+    urls: { regular: string };
+  };
+  closeModal: () => void;
+}
+const ImageModal: FC<ImageModalProps> = ({
   data: {
     alt_description,
     urls: { regular },
