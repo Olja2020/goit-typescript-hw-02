@@ -24,7 +24,6 @@ export interface LoadMoreBtnProps {
 }
 
 export interface ImageModalProps {
-  // image: ImageData;
   closeModal: () => void;
   data: ImageData;
 }
@@ -35,7 +34,7 @@ export default function App() {
   const [page, setPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showBtn, setShowBtn] = useState<boolean>(false);
-  const [modalIsOpen, setIsOpen] = React.useState<boolean>(false);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
   useEffect(() => {
     if (searchQuery === "") {
@@ -45,7 +44,7 @@ export default function App() {
       try {
         setIsLoading(true);
         setIsError(false);
-        const data: ImageResponse = await getImages(searchQuery, page);
+        const data = await getImages(searchQuery, page);
         setImages((prevState) => [...prevState, ...data.results]);
         setShowBtn(data.total_pages && data.total_pages !== page);
       } catch (error) {
@@ -82,13 +81,8 @@ export default function App() {
       {showBtn && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
       {isError && <ErrorMessage />}
       {modalIsOpen && (
-        <ImageModal
-          // image={selectedImage}
-          closeModal={closeModal}
-        data={selectedImage !== null ? { selectedImage } : null} 
-        //  { if (ImageData !== null) && data = { selectedImage } }/>
-      )
-    }
+        <ImageModal closeModal={closeModal} data={selectedImage} />
+      )}
     </div>
   );
 }
