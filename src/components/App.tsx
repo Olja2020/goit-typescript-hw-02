@@ -6,17 +6,44 @@ import SearchBar from "./searchBar/SearchBar";
 import ErrorMessage from "./errorMassage/ErrorMessage";
 import ImageModal from "./imageModal/ImageModal";
 import React from "react";
-import { getImages } from "../../src/Api";
+import { getImages } from "../Api";
 
+interface ImageData {
+  id: string;
+  alt_description: string;
+  urls: {
+    small: string;
+    regular: string;
+  };
+}
+
+interface ImageProps {
+  openModal: (image: ImageData) => void;
+}
+
+interface SearchBarProps {
+  images: ImageData[];
+  onSearch: (topic: string) => void;
+}
+
+interface LoadMoreBtnProps {
+  onClick: () => void;
+}
+
+interface ImageModalProps {
+  image: ImageData | null;
+  closeModal: () => void;
+  data: ImageData | null;
+}
 export default function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [showBtn, setShowBtn] = useState(false);
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [images, setImages] = useState<ImageData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [showBtn, setShowBtn] = useState<boolean>(false);
+  const [modalIsOpen, setIsOpen] = React.useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
   useEffect(() => {
     if (searchQuery === "") {
       return;
@@ -37,7 +64,7 @@ export default function App() {
     fetchImages();
   }, [page, searchQuery]);
 
-  const handleSearch = async (topic) => {
+  const handleSearch = async (topic: string) => {
     setSearchQuery(topic);
     setPage(1);
     setImages([]);
@@ -46,7 +73,7 @@ export default function App() {
     setPage(page + 1);
   };
 
-  function openModal(image) {
+  function openModal(image: ImageDataRegular) {
     setIsOpen(true);
     setSelectedImage(image);
   }
@@ -63,7 +90,7 @@ export default function App() {
       {isError && <ErrorMessage />}
       {modalIsOpen && (
         <ImageModal
-          image={selectedImage}
+          // image={selectedImage}
           closeModal={closeModal}
           data={selectedImage}
         />
