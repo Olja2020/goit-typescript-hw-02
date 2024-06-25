@@ -10,11 +10,9 @@ export interface ImageData {
 }
 
 export interface ImageResponse {
-  data: {
-    total: number;
-    total_pages: number;
-    results: ImageData[];
-  };
+  total: number;
+  total_pages: number;
+  results: ImageData[];
 }
 
 axios.defaults.baseURL = "https://api.unsplash.com/";

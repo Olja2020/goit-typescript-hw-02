@@ -9,14 +9,6 @@ import React from "react";
 import { getImages } from "../Api";
 import { ImageResponse } from "../Api";
 import { ImageData } from "../Api";
-// interface ImageData {
-//   id: string;
-//   alt_description: string;
-//   urls: {
-//     small: string;
-//     regular: string;
-//   };
-// }
 
 export interface ImageProps {
   openModal: (image: ImageData) => void;
@@ -30,13 +22,7 @@ export interface SearchBarProps {
 export interface LoadMoreBtnProps {
   onClick: () => void;
 }
-// interface ImageResponse {
-//   data: {
-//     total: number;
-//     total_pages: number;
-//     results: ImageData[];
-//   };
-// }
+
 export interface ImageModalProps {
   // image: ImageData;
   closeModal: () => void;
