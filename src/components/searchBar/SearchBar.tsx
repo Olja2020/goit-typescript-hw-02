@@ -16,8 +16,11 @@ const SearchBar: FC<SearchBarProps> = ({ onSearch, images }) => {
     <Formik
       initialValues={{ guery: "" }}
       onSubmit={(values, actions) => {
-        if (!values.query) return notify();
-        onSearch(values.query);
+        if (!values.guery) {
+          notify();
+          return;
+        }
+        onSearch(values.guery);
         actions.resetForm();
       }}
     >
@@ -25,7 +28,7 @@ const SearchBar: FC<SearchBarProps> = ({ onSearch, images }) => {
         <Field
           className={css.fieldForm}
           type="text"
-          name="query"
+          name="guery"
           autocomplete="off"
           autofocus
           placeholder="Search images and photos"
