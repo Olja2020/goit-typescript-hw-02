@@ -67,12 +67,12 @@ export default function App() {
   };
 
   function openModal(image: ImageData) {
-    setIsOpen(true);
+    
     setSelectedImage(image);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setSelectedImage(null);
   }
   return (
     <div>
