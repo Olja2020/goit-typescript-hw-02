@@ -46,7 +46,8 @@ export default function App() {
         setIsError(false);
         const data = await getImages(searchQuery, page);
         setImages((prevState) => [...prevState, ...data.results]);
-        setShowBtn(data.total_pages && data.total_pages !== page);
+
+        setShowBtn(data.total_pages > page);
       } catch (error) {
         setIsError(true);
       } finally {
@@ -80,7 +81,7 @@ export default function App() {
       {isLoading && <Loader />}
       {showBtn && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
       {isError && <ErrorMessage />}
-      {modalIsOpen && (
+      {selectedImage && (
         <ImageModal closeModal={closeModal} data={selectedImage} />
       )}
     </div>
